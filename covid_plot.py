@@ -21,14 +21,14 @@ def get_extreme_states(df, num_states):
     low_states: states with lowest covid cases
     high_states: states with highest covid cases
     '''
-    low_states=[]
-    high_states=[]
+#    low_states=[]
+#    high_states=[]
     states_df=df[['state','cases_avg_per_100k']].groupby('state').agg('mean')
     states_df.reset_index(inplace=True)
     sorted_df=states_df.sort_values('cases_avg_per_100k').head(num_states)
     reverse_sorted_df=states_df.sort_values('cases_avg_per_100k',ascending=False).head(num_states)
-    low_states=pd.unique(sorted_df.state)
-    high_states=pd.unique(reverse_sorted_df.state)
+    low_states=list(pd.unique(sorted_df.state))
+    high_states=list(pd.unique(reverse_sorted_df.state))
     return low_states, high_states
     
 
