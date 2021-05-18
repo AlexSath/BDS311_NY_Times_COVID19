@@ -1,4 +1,5 @@
 .ipynb*
 __ipynb__
+__ipynb__/
 __ipynb__/*
 *.csv
