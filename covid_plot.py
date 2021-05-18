@@ -22,8 +22,6 @@ def get_extreme_states(df, num_states):
     low_states: states with lowest covid cases
     high_states: states with highest covid cases
     '''
-#    low_states=[]
-#    high_states=[]
     states_df=df[['state','cases_avg_per_100k']].groupby('state').agg('mean')
     states_df.reset_index(inplace=True)
     sorted_df=states_df.sort_values('cases_avg_per_100k').head(num_states)
@@ -61,9 +59,7 @@ def modify_plot(ax):
     ax: handle to current plot
  
     '''
-    
-    #Just testing that the axes are working correctly...
-    ax.set_xlabel("Date (test)")
+    ax.set_xlabel("Date")
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%m-%y'))
     ax.xaxis.set_major_locator(mdates.MonthLocator())
     ax.tick_params(axis='x',labelsize=9,rotation = 30)

@@ -3,3 +3,4 @@ __ipynb__
 __ipynb__/
 __ipynb__/*
 *.csv
+__pycache__/
