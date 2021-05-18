@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import math
+import matplotlib.dates as mdates
 
 def read_in_data(filename):
     '''
@@ -43,18 +44,17 @@ def make_plot(df,states_to_plot):
     '''
     for state in states_to_plot:
         this_state_df = df[df.state == state]
-        plt.plot(this_state_df.date, this_state_df.cases_avg_per_100k, label = state)
-    
+        plt.plot(pd.to_datetime(this_state_df.date), this_state_df.cases_avg_per_100k, label = state)
     plt.title(f"Rolling Average for New Cases per 100k Residents in {len(states_to_plot)} States")
     plt.xlabel("Date")
     plt.ylabel("7-Day Cases/100k Rolling Average")
     plt.legend()
     ax = plt.gca()
-    return ax
+    return ax, state
     
    
       
-def modify_plot(ax,states_to_plot):
+def modify_plot(ax):
     '''
     This function modifies date formatting on plot to make them look better.
     INPUT: 
@@ -64,6 +64,9 @@ def modify_plot(ax,states_to_plot):
     
     #Just testing that the axes are working correctly...
     ax.set_xlabel("Date (test)")
+    ax.xaxis.set_major_formatter(mdates.DateFormatter('%m-%y'))
+    ax.xaxis.set_major_locator(mdates.MonthLocator())
+    ax.tick_params(axis='x',labelsize=9,rotation = 30)
 
   
    
